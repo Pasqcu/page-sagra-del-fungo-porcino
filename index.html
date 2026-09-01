@@ -8,12 +8,12 @@
 <meta name="theme-color" content="#F7E2B8">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍄</text></svg>">
 
-<!-- Precarico la locandina: è l'unica immagine della prima schermata -->
-<link rel="preload" as="image" href="assets/locandina-sagra.webp" imagesrcset="assets/locandina-sagra-800.webp 800w, assets/locandina-sagra.webp 1200w" imagesizes="(max-width:520px) 92vw, 480px" fetchpriority="high">
+<!-- Precarico la mascotte: è l'unica immagine della prima schermata -->
+<link rel="preload" as="image" href="assets/fungo-porcino.svg" fetchpriority="high">
 
 <style>
 /* ============================================================
-   DESIGN SYSTEM — palette autunnale presa dalla locandina
+   DESIGN SYSTEM — palette autunnale presa dal volantino della sagra
    ============================================================ */
 :root{
   --crema:        #FDF3DE;
@@ -96,37 +96,20 @@ a{color:inherit;text-decoration:none}
 }
 .home-title span{display:block; color:var(--marrone-soft); font-size:.72em; font-weight:700; margin-top:6px}
 
-/* --- LOCANDINA -------------------------------------------------------------
-   Per sostituirla: rimpiazza i file in assets/ mantenendo gli stessi nomi.
-   Aggiorna width/height qui sotto se cambiano le proporzioni (evita salti di layout).
+/* --- MASCOTTE ---------------------------------------------------------------
+   Vettoriale: nitida a qualunque dimensione e su qualunque densità di schermo.
+   Per sostituirla: rimpiazza assets/fungo-porcino.svg e aggiorna aspect-ratio
+   e width/height qui sotto col viewBox del nuovo file.
 --------------------------------------------------------------------------- */
-.poster-wrap{
-  position:relative; align-self:center;
-  display:inline-flex; max-width:100%; min-height:0;   /* si stringe sull'immagine */
-}
-/* Piccolo segnale che la locandina si apre: sta in un angolo per non
-   coprire le informazioni stampate sul volantino */
-.poster-badge{
-  position:absolute; right:9px; bottom:9px;
-  width:34px; height:34px; border-radius:50%;
-  display:grid; place-items:center;
-  background:rgba(36,22,10,.66); color:#fff;
-  font-size:1rem; line-height:1;
-  pointer-events:none;
-}
-
-.poster{
-  /* width:auto + max-height = la locandina si adatta senza bande vuote ai lati */
+.mascotte{
+  /* width:auto + max-height = la mascotte si adatta senza bande vuote ai lati */
   width:auto; max-width:100%; height:auto;
-  /* La locandina prende lo spazio che avanza: 420px sono l'altezza di titolo,
-     date, bottone e link. Così "Ordina qui" resta sopra la piega su ogni telefono,
+  /* Prende lo spazio che avanza: 445px sono l'altezza di titolo, date,
+     bottone e link. Così "Ordina qui" resta sopra la piega su ogni telefono,
      dal piccolo SE ai Pro Max, senza dover scrollare. */
-  max-height:max(190px, calc(100dvh - 420px));
+  max-height:max(170px, calc(100dvh - 445px));
   margin:0 auto;
-  border-radius:var(--r-md);
-  box-shadow:var(--ombra-md);
-  background:var(--crema);
-  aspect-ratio:1691/2400;          /* placeholder: tiene lo spazio prima del caricamento */
+  aspect-ratio:851/1018;           /* viewBox dell'SVG: tiene lo spazio prima del caricamento */
 }
 
 .home-meta{font-size:.95rem; font-weight:600; color:var(--marrone-soft); line-height:1.5; margin:0}
@@ -320,27 +303,21 @@ body.lb-lock{overflow:hidden}
       <span>Colle di Fuori — Rocca Priora (RM)</span>
     </h1>
 
-    <!-- LOCANDINA ---------------------------------------------------------
-         File attuali: assets/locandina-sagra.webp (1200px) e -800.webp (800px).
-         Per cambiarla: sovrascrivi questi due file, oppure modifica srcset qui sotto.
+    <!-- MASCOTTE ----------------------------------------------------------
+         Per cambiarla: sovrascrivi assets/fungo-porcino.svg e allinea
+         width/height e aspect-ratio nel CSS al viewBox del nuovo file.
     -------------------------------------------------------------------- -->
-    <div class="poster-wrap stagger">
-      <img
-      class="poster"
-      data-zoom="assets/locandina-sagra.webp"
-      role="button" tabindex="0"
-      src="assets/locandina-sagra.webp"
-      srcset="assets/locandina-sagra-800.webp 800w, assets/locandina-sagra.webp 1200w"
-      sizes="(max-width:520px) 92vw, 420px"
-      width="1691" height="2400"
+    <img
+      class="mascotte stagger"
+      src="assets/fungo-porcino.svg"
+      width="851" height="1018"
       fetchpriority="high" decoding="async"
-      alt="Locandina della 32ª Sagra del Fungo Porcino: 4-5-6, 11-12-13, 18-19-20 settembre 2026 a Colle di Fuori">
-      <span class="poster-badge" aria-hidden="true">⤢</span>
-    </div>
+      alt="Il fungo porcino con corona, mascotte della sagra">
 
     <p class="home-meta stagger">
       <b>4-5-6 · 11-12-13 · 18-19-20 Settembre 2026</b><br>
-      Stand gastronomici aperti a pranzo e cena · Ingresso libero
+      Stand gastronomici aperti a pranzo e cena<br>
+      Ingresso libero
     </p>
 
     <!-- CTA: porta alla schermata 2 -->
@@ -375,23 +352,23 @@ body.lb-lock{overflow:hidden}
       <p>Tocca un ristorante per aprire il suo menu.</p>
     </div>
 
-    <!-- ========== LOVE TRUFFLES ==========
-         1. LOGO  → sostituisci il file assets/logo-love-truffles.webp
-         2. NOME  → cambia il testo dentro <h3 class="card-name">
-         3. MENU  → href = link corto del QR dinamico (resta fisso, cambia solo la destinazione)
+    <!-- ========== PREMIATA TRATTORIA PRATI ==========
+         1. LOGO  → assets/logo-trattoria-prati.webp
+         2. NOME  → <h3 class="card-name">
+         3. MENU  → href = link corto del QR dinamico
     ================================================== -->
     <article class="card stagger">
       <div class="card-top">
         <div class="logo">
-          <!-- LOGO: per cambiarlo sovrascrivi assets/logo-love-truffles.webp (quadrato, 192x192) -->
-          <img src="assets/logo-love-truffles.webp" alt="Logo Love Truffles" width="192" height="192"
-               data-zoom="assets/logo-love-truffles-512.webp"
+          <!-- LOGO: per cambiarlo sovrascrivi assets/logo-trattoria-prati.webp (quadrato, 192x192) -->
+          <img src="assets/logo-trattoria-prati.webp" alt="Logo Premiata Trattoria Prati" width="192" height="192"
+               data-zoom="assets/logo-trattoria-prati-512.webp"
                role="button" tabindex="0"
                loading="lazy" decoding="async">
         </div>
-        <h3 class="card-name">Love Truffles</h3>
+        <h3 class="card-name">Premiata Trattoria Prati</h3>
       </div>
-      <a class="btn-menu" href="https://qromo.it/q/?t=zBlAxVZP" target="_blank" rel="noopener">
+      <a class="btn-menu" href="https://qromo.it/q/?t=6XtbK94G" target="_blank" rel="noopener">
         Consulta il Menu e Ordina <span class="ext" aria-hidden="true">↗</span>
       </a>
     </article>
@@ -417,23 +394,23 @@ body.lb-lock{overflow:hidden}
       </a>
     </article>
 
-    <!-- ========== PREMIATA TRATTORIA PRATI ==========
-         1. LOGO  → assets/logo-trattoria-prati.webp
-         2. NOME  → <h3 class="card-name">
-         3. MENU  → href = link corto del QR dinamico
+    <!-- ========== LOVE TRUFFLES ==========
+         1. LOGO  → sostituisci il file assets/logo-love-truffles.webp
+         2. NOME  → cambia il testo dentro <h3 class="card-name">
+         3. MENU  → href = link corto del QR dinamico (resta fisso, cambia solo la destinazione)
     ================================================== -->
     <article class="card stagger">
       <div class="card-top">
         <div class="logo">
-          <!-- LOGO: per cambiarlo sovrascrivi assets/logo-trattoria-prati.webp (quadrato, 192x192) -->
-          <img src="assets/logo-trattoria-prati.webp" alt="Logo Premiata Trattoria Prati" width="192" height="192"
-               data-zoom="assets/logo-trattoria-prati-512.webp"
+          <!-- LOGO: per cambiarlo sovrascrivi assets/logo-love-truffles.webp (quadrato, 192x192) -->
+          <img src="assets/logo-love-truffles.webp" alt="Logo Love Truffles" width="192" height="192"
+               data-zoom="assets/logo-love-truffles-512.webp"
                role="button" tabindex="0"
                loading="lazy" decoding="async">
         </div>
-        <h3 class="card-name">Premiata Trattoria Prati</h3>
+        <h3 class="card-name">Love Truffles</h3>
       </div>
-      <a class="btn-menu" href="https://qromo.it/q/?t=6XtbK94G" target="_blank" rel="noopener">
+      <a class="btn-menu" href="https://qromo.it/q/?t=zBlAxVZP" target="_blank" rel="noopener">
         Consulta il Menu e Ordina <span class="ext" aria-hidden="true">↗</span>
       </a>
     </article>
@@ -446,7 +423,7 @@ body.lb-lock{overflow:hidden}
 </main>
 
 <!-- ============================================================
-     LIGHTBOX — uno solo, riusato per locandina e loghi
+     LIGHTBOX — si apre toccando un logo
      ============================================================ -->
 <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Immagine ingrandita">
   <button class="lb-close" id="lb-close" type="button" aria-label="Chiudi">&times;</button>
@@ -458,7 +435,7 @@ body.lb-lock{overflow:hidden}
 /* ============================================================
    Router minimo a 2 schermate.
    Usa l'hash dell'URL, così il tasto "indietro" fisico di Android
-   torna alla locandina invece di chiudere la pagina.
+   torna alla schermata di benvenuto invece di chiudere la pagina.
    ============================================================ */
 (function () {
   var views = {
@@ -485,7 +462,7 @@ body.lb-lock{overflow:hidden}
   }
 
   /* ---------- Lightbox ----------
-     Un solo overlay riusato da locandina e loghi. L'immagine grande viene
+     Un solo overlay riusato dai tre loghi. L'immagine grande viene
      scaricata solo al primo tocco, non al caricamento della pagina. */
   var lb = document.getElementById('lightbox');
   var lbImg = document.getElementById('lb-img');
