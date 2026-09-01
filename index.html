@@ -178,13 +178,12 @@ a{color:inherit;text-decoration:none}
 
 /* Contenitore logo: mostra un segnaposto finché il file non esiste */
 .logo{
-  position:relative; flex:0 0 auto;
+  flex:0 0 auto;
   width:64px; height:64px; border-radius:16px;
-  background:var(--sabbia); border:1.5px solid var(--sabbia-scura);
-  display:grid; place-items:center; overflow:hidden;
-  font-size:1.6rem;
+  background:#fff; border:1.5px solid var(--sabbia-scura);
+  overflow:hidden;
 }
-.logo img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover}
+.logo img{width:100%; height:100%; object-fit:contain}
 .card-name{margin:0; font-size:1.15rem; font-weight:800; line-height:1.25}
 .card-note{margin:3px 0 0; font-size:.85rem; color:var(--marrone-soft); font-weight:500}
 
@@ -307,23 +306,21 @@ a{color:inherit;text-decoration:none}
     <!-- ========== LOVE TRUFFLES ==========
          1. LOGO  → sostituisci il file assets/logo-love-truffles.webp
          2. NOME  → cambia il testo dentro <h3 class="card-name">
-         3. MENU  → sostituisci href="#" con il link reale del menu
+         3. MENU  → href = link corto del QR dinamico (resta fisso, cambia solo la destinazione)
     ================================================== -->
     <article class="card stagger">
       <div class="card-top">
-        <div class="logo" aria-hidden="true">🍄
-          <!-- LOGO: metti il file in assets/logo-love-truffles.webp e togli i commenti
-               qui sotto. Finché la riga resta commentata la card mostra il fungo
-               segnaposto e non spreca una richiesta di rete a vuoto.
-          <img src="assets/logo-love-truffles.webp" alt="" loading="lazy" decoding="async">
-          -->
+        <div class="logo">
+          <!-- LOGO: per cambiarlo sovrascrivi assets/logo-love-truffles.webp (quadrato, 192x192) -->
+          <img src="assets/logo-love-truffles.webp" alt="" width="192" height="192"
+               loading="lazy" decoding="async">
         </div>
         <div>
           <h3 class="card-name">Love Truffles</h3>
           <p class="card-note">Stand gastronomico</p>
         </div>
       </div>
-      <a class="btn-menu" href="#" target="_blank" rel="noopener">
+      <a class="btn-menu" href="https://qromo.it/q/?t=zBlAxVZP" target="_blank" rel="noopener">
         Consulta il Menu e Ordina <span class="ext" aria-hidden="true">↗</span>
       </a>
     </article>
@@ -331,16 +328,14 @@ a{color:inherit;text-decoration:none}
     <!-- ========== ZI RIGHETTO ==========
          1. LOGO  → assets/logo-zi-righetto.webp
          2. NOME  → <h3 class="card-name">
-         3. MENU  → href="#"
+         3. MENU  → href = link corto del QR dinamico
     ================================================== -->
     <article class="card stagger">
       <div class="card-top">
-        <div class="logo" aria-hidden="true">🍄
-          <!-- LOGO: metti il file in assets/logo-zi-righetto.webp e togli i commenti
-               qui sotto. Finché la riga resta commentata la card mostra il fungo
-               segnaposto e non spreca una richiesta di rete a vuoto.
-          <img src="assets/logo-zi-righetto.webp" alt="" loading="lazy" decoding="async">
-          -->
+        <div class="logo">
+          <!-- LOGO: per cambiarlo sovrascrivi assets/logo-zi-righetto.webp (quadrato, 192x192) -->
+          <img src="assets/logo-zi-righetto.webp" alt="" width="192" height="192"
+               loading="lazy" decoding="async">
         </div>
         <div>
           <h3 class="card-name">Zi Righetto</h3>
@@ -355,16 +350,14 @@ a{color:inherit;text-decoration:none}
     <!-- ========== PREMIATA TRATTORIA PRATI ==========
          1. LOGO  → assets/logo-trattoria-prati.webp
          2. NOME  → <h3 class="card-name">
-         3. MENU  → href="#"
+         3. MENU  → href = link corto del QR dinamico
     ================================================== -->
     <article class="card stagger">
       <div class="card-top">
-        <div class="logo" aria-hidden="true">🍄
-          <!-- LOGO: metti il file in assets/logo-trattoria-prati.webp e togli i commenti
-               qui sotto. Finché la riga resta commentata la card mostra il fungo
-               segnaposto e non spreca una richiesta di rete a vuoto.
-          <img src="assets/logo-trattoria-prati.webp" alt="" loading="lazy" decoding="async">
-          -->
+        <div class="logo">
+          <!-- LOGO: per cambiarlo sovrascrivi assets/logo-trattoria-prati.webp (quadrato, 192x192) -->
+          <img src="assets/logo-trattoria-prati.webp" alt="" width="192" height="192"
+               loading="lazy" decoding="async">
         </div>
         <div>
           <h3 class="card-name">Premiata Trattoria Prati</h3>
@@ -429,6 +422,14 @@ a{color:inherit;text-decoration:none}
 
   window.addEventListener('popstate', fromHash);
   fromHash();
+
+  // Precarico i loghi a pagina ferma: 18 KB in totale, così toccando
+  // "Ordina qui" le card sono già complete anche con rete lenta.
+  var idle = window.requestIdleCallback || function (f) { setTimeout(f, 1200); };
+  idle(function () {
+    var imgs = document.querySelectorAll('.logo img');
+    for (var i = 0; i < imgs.length; i++) new Image().src = imgs[i].src;
+  });
 })();
 </script>
 

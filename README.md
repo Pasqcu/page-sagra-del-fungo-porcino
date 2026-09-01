@@ -37,14 +37,30 @@ invece di chiudere la pagina.
 - **Touch-friendly**: bottoni ≥ 56px, nessuno scroll orizzontale, `safe-area-inset` per i notch.
 - **Animazioni** disattivate automaticamente con `prefers-reduced-motion`.
 
-## Cosa resta da inserire
+## Menu: link corti dei QR dinamici
 
-Tutti i punti sono marcati con commenti espliciti dentro `index.html`:
+I menu stanno dietro QR dinamici. Nel bottone va il **link corto del QR**, non l'URL finale:
+il link corto resta lo stesso per sempre, cambia solo la destinazione a cui punta. Così chi
+inquadra il QR fisico e chi tocca il bottone finiscono nello stesso posto, e con un telefono solo.
+
+| Ristorante | Link corto |
+|---|---|
+| Love Truffles | `https://qromo.it/q/?t=zBlAxVZP` |
+| Zi Righetto | da inserire |
+| Premiata Trattoria Prati | da inserire |
+
+## Loghi
+
+`assets/logo-love-truffles.webp`, `logo-zi-righetto.webp`, `logo-trattoria-prati.webp` —
+quadrati 192x192, ~18 KB in totale, precaricati quando il telefono è fermo.
+Love Truffles e Zi Righetto arrivavano da foto su carta: fondo riportato a bianco pieno,
+rumore e ombre rimossi, ritaglio sul disegno. Prati era già pulito, solo ritagliato e ridimensionato.
+
+## Cosa resta da inserire
 
 | Cosa | Dove |
 |---|---|
-| Loghi ristoranti | Metti i file in `assets/logo-love-truffles.webp`, `logo-zi-righetto.webp`, `logo-trattoria-prati.webp` e togli il commento attorno al tag `<img>` nella card. Finché resta commentato la card mostra un fungo segnaposto e non spreca richieste di rete a vuoto |
-| Link ai menu | `href="#"` nei bottoni `Consulta il Menu e Ordina` |
+| Link menu di Zi Righetto e Prati | `href="#"` nei bottoni `Consulta il Menu e Ordina` |
 
 ## Modifiche
 
