@@ -11,9 +11,11 @@ Si apre scansionando un QR code al tavolo: locandina, poi scelta dello stand gas
 ## Struttura
 
 ```
-index.html                        tutta l'app (HTML + CSS + JS inline)
-assets/locandina-sagra.webp       locandina 1200px — 78 KB
-assets/locandina-sagra-800.webp   locandina 800px  — 44 KB
+index.html                          tutta l'app (HTML + CSS + JS inline)
+assets/locandina-sagra.webp         locandina 1200px — 78 KB (anche versione ingrandita)
+assets/locandina-sagra-800.webp     locandina 800px  — 44 KB
+assets/logo-<nome>.webp             logo nella card, 192px
+assets/logo-<nome>-512.webp         logo ingrandito, 512px
 ```
 
 Due schermate gestite in JS senza ricaricare la pagina:
@@ -24,6 +26,12 @@ Due schermate gestite in JS senza ricaricare la pagina:
 
 Il router usa l'hash (`#ordina`), così il tasto indietro fisico di Android torna alla locandina
 invece di chiudere la pagina.
+
+**Lightbox.** Locandina e loghi si aprono a schermo pieno al tocco; un secondo tocco
+sull'immagine ingrandisce ancora e la rende trascinabile. Si chiude con la X, toccando fuori,
+con Esc o col tasto indietro — anche la foto aperta occupa una voce di cronologia, quindi
+il gesto indietro chiude prima la foto e solo dopo cambia schermata.
+Le versioni grandi vengono scaricate al primo tocco, non al caricamento della pagina.
 
 ## Scelte tecniche
 
@@ -53,6 +61,7 @@ inquadra il QR fisico e chi tocca il bottone finiscono nello stesso posto, e con
 
 `assets/logo-love-truffles.webp`, `logo-zi-righetto.webp`, `logo-trattoria-prati.webp` —
 quadrati 192x192, ~18 KB in totale, precaricati quando il telefono è fermo.
+Le varianti `-512` servono solo alla lightbox e si scaricano a richiesta.
 Love Truffles e Zi Righetto arrivavano da foto su carta: fondo riportato a bianco pieno,
 rumore e ombre rimossi, ritaglio sul disegno. Prati era già pulito, solo ritagliato e ridimensionato.
 Tutti e tre sono centrati sul baricentro dell'inchiostro, non sul rettangolo che li contiene:
