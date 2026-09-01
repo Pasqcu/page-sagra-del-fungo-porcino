@@ -101,7 +101,8 @@ a{color:inherit;text-decoration:none}
    Aggiorna width/height qui sotto se cambiano le proporzioni (evita salti di layout).
 --------------------------------------------------------------------------- */
 .poster{
-  width:100%; height:auto;
+  /* width:auto + max-height = la locandina si adatta senza bande vuote ai lati */
+  width:auto; max-width:100%; height:auto;
   /* La locandina prende lo spazio che avanza: 420px sono l'altezza di titolo,
      date, bottone e link. Così "Ordina qui" resta sopra la piega su ogni telefono,
      dal piccolo SE ai Pro Max, senza dover scrollare. */
@@ -111,7 +112,6 @@ a{color:inherit;text-decoration:none}
   box-shadow:var(--ombra-md);
   background:var(--crema);
   aspect-ratio:1691/2400;          /* placeholder: tiene lo spazio prima del caricamento */
-  object-fit:contain;
 }
 
 .home-meta{font-size:.95rem; font-weight:600; color:var(--marrone-soft); line-height:1.5; margin:0}
