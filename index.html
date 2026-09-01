@@ -100,6 +100,19 @@ a{color:inherit;text-decoration:none}
    Per sostituirla: rimpiazza i file in assets/ mantenendo gli stessi nomi.
    Aggiorna width/height qui sotto se cambiano le proporzioni (evita salti di layout).
 --------------------------------------------------------------------------- */
+.poster-wrap{
+  position:relative; align-self:center;
+  display:inline-flex; max-width:100%; min-height:0;   /* si stringe sull'immagine */
+}
+.poster-badge{
+  position:absolute; right:10px; bottom:10px;
+  display:flex; align-items:center; gap:6px;
+  padding:7px 12px; border-radius:999px;
+  background:rgba(36,22,10,.72); color:#fff;
+  font-size:.78rem; font-weight:700; letter-spacing:.01em;
+  pointer-events:none;
+}
+
 .poster{
   /* width:auto + max-height = la locandina si adatta senza bande vuote ai lati */
   width:auto; max-width:100%; height:auto;
@@ -210,6 +223,59 @@ a{color:inherit;text-decoration:none}
 }
 
 /* ============================================================
+   LIGHTBOX — immagine a schermo pieno, tocca per ingrandire ancora
+   ============================================================ */
+[data-zoom]{cursor:zoom-in}
+
+.lightbox{
+  position:fixed; inset:0; z-index:50;
+  display:flex; align-items:center; justify-content:center;
+  padding:calc(64px + var(--safe-t)) 14px calc(18px + var(--safe-b));
+  background:rgba(36,22,10,.94);
+  opacity:0; visibility:hidden;
+  transition:opacity .22s ease, visibility .22s;
+}
+.lightbox.is-open{opacity:1; visibility:visible}
+
+.lb-stage{
+  display:flex; align-items:center; justify-content:center;
+  max-width:100%; max-height:100%;
+  overflow:auto; overscroll-behavior:contain; -webkit-overflow-scrolling:touch;
+}
+.lb-stage img{
+  max-width:100%; max-height:100%;
+  border-radius:14px; background:#fff;
+  box-shadow:0 18px 50px rgba(0,0,0,.45);
+  transition:opacity .18s ease;
+}
+/* secondo tocco: ingrandisce e rende l'immagine trascinabile */
+.lightbox.is-zoomed .lb-stage{width:100%; height:100%; align-items:flex-start}
+.lightbox.is-zoomed .lb-stage img{
+  max-width:none; max-height:none; width:210%; height:auto;
+  border-radius:0; cursor:zoom-out;
+}
+
+.lb-close{
+  position:absolute; top:calc(12px + var(--safe-t)); right:14px;
+  width:48px; height:48px; border-radius:50%;
+  display:grid; place-items:center;
+  background:rgba(255,255,255,.15); color:#fff;
+  font-size:1.7rem; line-height:1;
+  transition:transform .14s ease, background .2s ease;
+}
+.lb-close:active{transform:scale(.92); background:rgba(255,255,255,.28)}
+
+.lb-hint{
+  position:absolute; left:0; right:0; bottom:calc(16px + var(--safe-b));
+  text-align:center; color:rgba(255,255,255,.62);
+  font-size:.82rem; font-weight:600; pointer-events:none;
+  transition:opacity .2s ease;
+}
+.lightbox.is-zoomed .lb-hint{opacity:0}
+
+body.lb-lock{overflow:hidden}
+
+/* ============================================================
    FOOTER (presente su entrambe le schermate)
    ============================================================ */
 .foot{
@@ -256,14 +322,19 @@ a{color:inherit;text-decoration:none}
          File attuali: assets/locandina-sagra.webp (1200px) e -800.webp (800px).
          Per cambiarla: sovrascrivi questi due file, oppure modifica srcset qui sotto.
     -------------------------------------------------------------------- -->
-    <img
-      class="poster stagger"
+    <div class="poster-wrap stagger">
+      <img
+      class="poster"
+      data-zoom="assets/locandina-sagra.webp"
+      role="button" tabindex="0"
       src="assets/locandina-sagra.webp"
       srcset="assets/locandina-sagra-800.webp 800w, assets/locandina-sagra.webp 1200w"
       sizes="(max-width:520px) 92vw, 420px"
       width="1691" height="2400"
       fetchpriority="high" decoding="async"
       alt="Locandina della 32ª Sagra del Fungo Porcino: 4-5-6, 11-12-13, 18-19-20 settembre 2026 a Colle di Fuori">
+      <span class="poster-badge" aria-hidden="true">⤡ Tocca per ingrandire</span>
+    </div>
 
     <p class="home-meta stagger">
       <b>4-5-6 · 11-12-13 · 18-19-20 Settembre 2026</b><br>
@@ -311,7 +382,9 @@ a{color:inherit;text-decoration:none}
       <div class="card-top">
         <div class="logo">
           <!-- LOGO: per cambiarlo sovrascrivi assets/logo-love-truffles.webp (quadrato, 192x192) -->
-          <img src="assets/logo-love-truffles.webp" alt="" width="192" height="192"
+          <img src="assets/logo-love-truffles.webp" alt="Logo Love Truffles" width="192" height="192"
+               data-zoom="assets/logo-love-truffles-512.webp"
+               role="button" tabindex="0"
                loading="lazy" decoding="async">
         </div>
         <h3 class="card-name">Love Truffles</h3>
@@ -330,7 +403,9 @@ a{color:inherit;text-decoration:none}
       <div class="card-top">
         <div class="logo">
           <!-- LOGO: per cambiarlo sovrascrivi assets/logo-zi-righetto.webp (quadrato, 192x192) -->
-          <img src="assets/logo-zi-righetto.webp" alt="" width="192" height="192"
+          <img src="assets/logo-zi-righetto.webp" alt="Logo Zi Righetto" width="192" height="192"
+               data-zoom="assets/logo-zi-righetto-512.webp"
+               role="button" tabindex="0"
                loading="lazy" decoding="async">
         </div>
         <h3 class="card-name">Zi Righetto</h3>
@@ -349,7 +424,9 @@ a{color:inherit;text-decoration:none}
       <div class="card-top">
         <div class="logo">
           <!-- LOGO: per cambiarlo sovrascrivi assets/logo-trattoria-prati.webp (quadrato, 192x192) -->
-          <img src="assets/logo-trattoria-prati.webp" alt="" width="192" height="192"
+          <img src="assets/logo-trattoria-prati.webp" alt="Logo Premiata Trattoria Prati" width="192" height="192"
+               data-zoom="assets/logo-trattoria-prati-512.webp"
+               role="button" tabindex="0"
                loading="lazy" decoding="async">
         </div>
         <h3 class="card-name">Premiata Trattoria Prati</h3>
@@ -365,6 +442,15 @@ a{color:inherit;text-decoration:none}
 
   </div>
 </main>
+
+<!-- ============================================================
+     LIGHTBOX — uno solo, riusato per locandina e loghi
+     ============================================================ -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Immagine ingrandita">
+  <button class="lb-close" id="lb-close" type="button" aria-label="Chiudi">&times;</button>
+  <div class="lb-stage" id="lb-stage"><img id="lb-img" alt=""></div>
+  <p class="lb-hint">Tocca l'immagine per ingrandire ancora</p>
+</div>
 
 <script>
 /* ============================================================
@@ -396,7 +482,56 @@ a{color:inherit;text-decoration:none}
     show(location.hash === '#ordina' ? 'menu' : 'home');
   }
 
+  /* ---------- Lightbox ----------
+     Un solo overlay riusato da locandina e loghi. L'immagine grande viene
+     scaricata solo al primo tocco, non al caricamento della pagina. */
+  var lb = document.getElementById('lightbox');
+  var lbImg = document.getElementById('lb-img');
+  var lbOpen = false;
+
+  function openLightbox(src, alt) {
+    lbImg.src = src;
+    lbImg.alt = alt || '';
+    lb.classList.remove('is-zoomed');
+    lb.classList.add('is-open');
+    document.body.classList.add('lb-lock');
+    lbOpen = true;
+    document.getElementById('lb-close').focus({ preventScroll: true });
+    // una voce di cronologia in più: il tasto indietro chiude la foto
+    history.pushState({ lb: 1, v: current }, '', location.href);
+  }
+
+  function closeLightbox(useHistory) {
+    if (!lbOpen) return;
+    lbOpen = false;
+    lb.classList.remove('is-open', 'is-zoomed');
+    document.body.classList.remove('lb-lock');
+    if (useHistory && history.state && history.state.lb) history.back();
+  }
+
+  document.getElementById('lb-close').addEventListener('click', function () {
+    closeLightbox(true);
+  });
+  lb.addEventListener('click', function (e) {
+    if (e.target === lbImg) lb.classList.toggle('is-zoomed');  // secondo livello di zoom
+    else closeLightbox(true);                                   // fuori dall'immagine: chiude
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeLightbox(true);
+    if ((e.key === 'Enter' || e.key === ' ') && document.activeElement &&
+        document.activeElement.matches('[data-zoom]')) {
+      e.preventDefault();
+      var t = document.activeElement;
+      openLightbox(t.getAttribute('data-zoom'), t.getAttribute('alt'));
+    }
+  });
+
   document.addEventListener('click', function (e) {
+    var zoom = e.target.closest('[data-zoom]');
+    if (zoom && !lbOpen) {
+      openLightbox(zoom.getAttribute('data-zoom'), zoom.getAttribute('alt'));
+      return;
+    }
     var el = e.target.closest('[data-go]');
     if (!el) return;
     var target = el.getAttribute('data-go');
@@ -410,7 +545,10 @@ a{color:inherit;text-decoration:none}
     }
   });
 
-  window.addEventListener('popstate', fromHash);
+  window.addEventListener('popstate', function () {
+    if (lbOpen) closeLightbox(false);   // il tasto indietro chiude prima la foto
+    fromHash();
+  });
   fromHash();
 
   // Precarico i loghi a pagina ferma: 18 KB in totale, così toccando
