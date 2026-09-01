@@ -43,11 +43,11 @@ I menu stanno dietro QR dinamici. Nel bottone va il **link corto del QR**, non l
 il link corto resta lo stesso per sempre, cambia solo la destinazione a cui punta. Così chi
 inquadra il QR fisico e chi tocca il bottone finiscono nello stesso posto, e con un telefono solo.
 
-| Ristorante | Link corto |
-|---|---|
-| Love Truffles | `https://qromo.it/q/?t=zBlAxVZP` |
-| Zi Righetto | da inserire |
-| Premiata Trattoria Prati | da inserire |
+| Ristorante | Link corto | Destinazione |
+|---|---|---|
+| Love Truffles | `https://qromo.it/q/?t=zBlAxVZP` | `lovetruffles.qromo.it` |
+| Zi Righetto | `https://qromo.it/q/?t=0xG5N3Ff` | `zirighetto.qromo.it` |
+| Premiata Trattoria Prati | `https://qromo.it/q/?t=6XtbK94G` | `premiatatrattoriaprati.qromo.it` |
 
 ## Loghi
 
@@ -55,12 +55,8 @@ inquadra il QR fisico e chi tocca il bottone finiscono nello stesso posto, e con
 quadrati 192x192, ~18 KB in totale, precaricati quando il telefono è fermo.
 Love Truffles e Zi Righetto arrivavano da foto su carta: fondo riportato a bianco pieno,
 rumore e ombre rimossi, ritaglio sul disegno. Prati era già pulito, solo ritagliato e ridimensionato.
-
-## Cosa resta da inserire
-
-| Cosa | Dove |
-|---|---|
-| Link menu di Zi Righetto e Prati | `href="#"` nei bottoni `Consulta il Menu e Ordina` |
+Tutti e tre sono centrati sul baricentro dell'inchiostro, non sul rettangolo che li contiene:
+con code sottili da un lato i due centri non coincidono e il logo sembra storto nella tessera.
 
 ## Modifiche
 
