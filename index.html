@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sagra del Fungo Porcino</title>
+<meta name="description" content="Tre giorni di cucina, musica e tradizione dedicati al fungo porcino.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#fbf7f0;
+    --surface:#fffdf9;
+    --ink:#241d16;
+    --muted:#6b5d4d;
+    --line:#e3d8c6;
+    --forest:#2f4a33;
+    --porcini:#8a5a2b;
+    --terracotta:#b4552f;
+    --radius:14px;
+    --wrap:1080px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;background:var(--bg);color:var(--ink);
+    font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{font-family:Fraunces,Georgia,serif;line-height:1.15;margin:0 0 .4em}
+  h2{font-size:clamp(1.7rem,4vw,2.4rem);font-weight:800}
+  h3{font-size:1.15rem;font-weight:600}
+  p{margin:0 0 1em}
+  a{color:var(--terracotta)}
+  .wrap{max-width:var(--wrap);margin:0 auto;padding:0 22px}
+  section{padding:clamp(56px,8vw,96px) 0;border-top:1px solid var(--line)}
+  .eyebrow{
+    font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--porcini);font-weight:600;margin-bottom:.7em
+  }
+
+  /* nav */
+  header{
+    position:sticky;top:0;z-index:20;background:rgba(251,247,240,.92);
+    backdrop-filter:blur(8px);border-bottom:1px solid var(--line)
+  }
+  nav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 22px;max-width:var(--wrap);margin:0 auto}
+  .brand{font-family:Fraunces,Georgia,serif;font-weight:800;font-size:1.05rem;text-decoration:none;color:var(--ink)}
+  .brand span{color:var(--porcini)}
+  .nav-links{display:flex;gap:22px;flex-wrap:wrap}
+  .nav-links a{color:var(--muted);text-decoration:none;font-size:.92rem;font-weight:500}
+  .nav-links a:hover{color:var(--forest)}
+  @media(max-width:640px){.nav-links{display:none}}
+
+  /* hero */
+  .hero{
+    border-top:0;text-align:center;
+    padding:clamp(70px,11vw,130px) 0 clamp(56px,8vw,96px);
+    background:
+      radial-gradient(1100px 460px at 50% -12%, #efe4d1 0%, rgba(239,228,209,0) 62%),
+      var(--bg);
+  }
+  .hero h1{font-size:clamp(2.5rem,7.5vw,4.6rem);font-weight:800;letter-spacing:-.02em}
+  .hero h1 em{font-style:normal;color:var(--porcini)}
+  .lede{font-size:clamp(1.05rem,2.2vw,1.3rem);color:var(--muted);max-width:38ch;margin:0 auto 1.8em}
+  .dates{
+    display:inline-flex;align-items:center;gap:10px;margin-bottom:1.6em;
+    background:var(--forest);color:#f4efe4;border-radius:999px;
+    padding:9px 20px;font-size:.9rem;font-weight:600;letter-spacing:.02em
+  }
+  .btn{
+    display:inline-block;background:var(--terracotta);color:#fff;text-decoration:none;
+    padding:14px 30px;border-radius:999px;font-weight:600;font-size:.98rem;
+    box-shadow:0 6px 18px rgba(180,85,47,.24)
+  }
+  .btn:hover{background:#9c4525}
+  .btn.ghost{background:transparent;color:var(--forest);box-shadow:none;border:1.5px solid var(--forest)}
+  .btn.ghost:hover{background:var(--forest);color:#f4efe4}
+  .btn-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+
+  /* generic grid */
+  .grid{display:grid;gap:22px}
+  .cols-3{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+  .card{
+    background:var(--surface);border:1px solid var(--line);
+    border-radius:var(--radius);padding:26px
+  }
+  .card p:last-child{margin-bottom:0}
+  .card .num{font-family:Fraunces,serif;font-size:1.9rem;font-weight:800;color:var(--porcini);display:block;line-height:1}
+
+  /* programma */
+  .day{border-bottom:1px solid var(--line);padding:26px 0}
+  .day:last-child{border-bottom:0}
+  .day-head{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:14px}
+  .day-head h3{margin:0}
+  .day-date{color:var(--muted);font-size:.9rem}
+  .slots{display:grid;gap:10px}
+  .slot{display:grid;grid-template-columns:76px 1fr;gap:16px;align-items:baseline}
+  .slot time{font-variant-numeric:tabular-nums;font-weight:600;color:var(--forest);font-size:.95rem}
+  @media(max-width:520px){.slot{grid-template-columns:64px 1fr;gap:12px}}
+
+  /* menu */
+  .menu-list{list-style:none;padding:0;margin:0}
+  .menu-list li{
+    display:flex;align-items:baseline;gap:12px;
+    padding:12px 0;border-bottom:1px dashed var(--line)
+  }
+  .menu-list li:last-child{border-bottom:0}
+  .dish{font-weight:600}
+  .dot{flex:1;border-bottom:1px dotted var(--line);transform:translateY(-4px)}
+  .price{font-variant-numeric:tabular-nums;color:var(--porcini);font-weight:600;white-space:nowrap}
+  .dish-note{display:block;font-weight:400;font-size:.88rem;color:var(--muted)}
+
+  /* info */
+  .info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:22px}
+  .info-grid dt{font-weight:600;color:var(--forest);margin-bottom:.25em}
+  .info-grid dd{margin:0 0 1.3em;color:var(--muted)}
+  .info-grid dd:last-child{margin-bottom:0}
+
+  footer{
+    background:var(--forest);color:#d8d0c2;padding:52px 0;border-top:0;
+    font-size:.92rem
+  }
+  footer a{color:#f0e6d4}
+  .foot-inner{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+  .foot-brand{font-family:Fraunces,serif;font-weight:800;color:#f4efe4;font-size:1.1rem}
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <a class="brand" href="#top">Sagra del <span>Fungo Porcino</span></a>
+    <div class="nav-links">
+      <a href="#sagra">La sagra</a>
+      <a href="#programma">Programma</a>
+      <a href="#menu">Menù</a>
+      <a href="#info">Info</a>
+    </div>
+  </nav>
+</header>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="wrap">
+      <div class="dates">21 – 23 Settembre 2026</div>
+      <h1>Sagra del<br><em>Fungo Porcino</em></h1>
+      <p class="lede">Tre giorni di cucina di bosco, musica dal vivo e tradizione nel cuore del paese.</p>
+      <div class="btn-row">
+        <a class="btn" href="#programma">Vedi il programma</a>
+        <a class="btn ghost" href="#menu">Scopri il menù</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="sagra">
+    <div class="wrap">
+      <p class="eyebrow">La sagra</p>
+      <h2>Il porcino, dal bosco alla tavola</h2>
+      <p style="max-width:62ch;color:var(--muted)">
+        Ogni settembre il paese si riempie di profumo di sottobosco. I funghi arrivano
+        dai boschi della zona, raccolti la mattina stessa, e finiscono nelle mani dei
+        cuochi volontari della Pro Loco. Niente di industriale: tavolate lunghe,
+        piatti di ceramica e ricette che si tramandano da generazioni.
+      </p>
+      <div class="grid cols-3" style="margin-top:34px">
+        <div class="card">
+          <span class="num">3</span>
+          <h3>Giorni di festa</h3>
+          <p>Dal venerdì sera alla domenica notte, cucina aperta a pranzo e a cena.</p>
+        </div>
+        <div class="card">
+          <span class="num">12</span>
+          <h3>Piatti in menù</h3>
+          <p>Dagli antipasti al dolce, tutti preparati sul posto con porcini freschi.</p>
+        </div>
+        <div class="card">
+          <span class="num">40</span>
+          <h3>Volontari</h3>
+          <p>Cucina, servizio, allestimenti: la sagra la fa il paese, non un catering.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="programma">
+    <div class="wrap">
+      <p class="eyebrow">Programma</p>
+      <h2>Tre giorni, ora per ora</h2>
+
+      <div class="day">
+        <div class="day-head">
+          <h3>Venerdì</h3><span class="day-date">21 settembre</span>
+        </div>
+        <div class="slots">
+          <div class="slot"><time>18:00</time><span>Apertura stand e mostra micologica</span></div>
+          <div class="slot"><time>19:30</time><span>Apertura cucina — cena sotto il tendone</span></div>
+          <div class="slot"><time>21:30</time><span>Musica dal vivo: gruppo folk locale</span></div>
+        </div>
+      </div>
+
+      <div class="day">
+        <div class="day-head">
+          <h3>Sabato</h3><span class="day-date">22 settembre</span>
+        </div>
+        <div class="slots">
+          <div class="slot"><time>09:00</time><span>Escursione guidata nei boschi (iscrizione richiesta)</span></div>
+          <div class="slot"><time>12:30</time><span>Pranzo con menù completo</span></div>
+          <div class="slot"><time>16:00</time><span>Show cooking: il porcino in cinque cotture</span></div>
+          <div class="slot"><time>19:30</time><span>Cena e apertura enoteca</span></div>
+          <div class="slot"><time>22:00</time><span>Concerto in piazza</span></div>
+        </div>
+      </div>
+
+      <div class="day">
+        <div class="day-head">
+          <h3>Domenica</h3><span class="day-date">23 settembre</span>
+        </div>
+        <div class="slots">
+          <div class="slot"><time>10:00</time><span>Mercato dei produttori locali</span></div>
+          <div class="slot"><time>12:30</time><span>Pranzo della sagra</span></div>
+          <div class="slot"><time>15:30</time><span>Giochi e laboratori per bambini</span></div>
+          <div class="slot"><time>19:00</time><span>Ultima cena e premiazione del porcino più grande</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="menu">
+    <div class="wrap">
+      <p class="eyebrow">Menù</p>
+      <h2>Cosa si mangia</h2>
+      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(300px,1fr));margin-top:26px">
+
+        <div class="card">
+          <h3>Antipasti</h3>
+          <ul class="menu-list">
+            <li><span class="dish">Crostoni ai porcini<span class="dish-note">pane casereccio, aglio, prezzemolo</span></span><span class="dot"></span><span class="price">5 €</span></li>
+            <li><span class="dish">Insalata di porcini crudi<span class="dish-note">scaglie di grana, olio nuovo</span></span><span class="dot"></span><span class="price">7 €</span></li>
+            <li><span class="dish">Tagliere di salumi e funghi sott'olio</span><span class="dot"></span><span class="price">8 €</span></li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Primi</h3>
+          <ul class="menu-list">
+            <li><span class="dish">Tagliatelle ai porcini<span class="dish-note">pasta fresca tirata a mano</span></span><span class="dot"></span><span class="price">10 €</span></li>
+            <li><span class="dish">Risotto ai funghi porcini</span><span class="dot"></span><span class="price">10 €</span></li>
+            <li><span class="dish">Zuppa di funghi e castagne</span><span class="dot"></span><span class="price">8 €</span></li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Secondi</h3>
+          <ul class="menu-list">
+            <li><span class="dish">Porcini alla griglia<span class="dish-note">solo cappelle, olio e sale</span></span><span class="dot"></span><span class="price">12 €</span></li>
+            <li><span class="dish">Tagliata con porcini trifolati</span><span class="dot"></span><span class="price">16 €</span></li>
+            <li><span class="dish">Polenta e funghi</span><span class="dot"></span><span class="price">9 €</span></li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Dolci e bevande</h3>
+          <ul class="menu-list">
+            <li><span class="dish">Crostata di frutti di bosco</span><span class="dot"></span><span class="price">4 €</span></li>
+            <li><span class="dish">Castagnaccio</span><span class="dot"></span><span class="price">4 €</span></li>
+            <li><span class="dish">Vino della casa<span class="dish-note">rosso o bianco, al calice</span></span><span class="dot"></span><span class="price">2 €</span></li>
+          </ul>
+        </div>
+
+      </div>
+      <p style="margin-top:22px;color:var(--muted);font-size:.92rem">
+        Disponibili opzioni vegetariane. Per intolleranze e allergie chiedere al banco.
+      </p>
+    </div>
+  </section>
+
+  <section id="info">
+    <div class="wrap">
+      <p class="eyebrow">Info pratiche</p>
+      <h2>Come arrivare e contatti</h2>
+      <dl class="info-grid" style="margin-top:26px">
+        <div>
+          <dt>Dove</dt>
+          <dd>Piazza del Municipio<br>Centro storico del paese</dd>
+          <dt>Parcheggio</dt>
+          <dd>Area gratuita a 300 m dal tendone, con navetta serale.</dd>
+        </div>
+        <div>
+          <dt>Orari cucina</dt>
+          <dd>Pranzo 12:30 – 14:30<br>Cena 19:30 – 22:30</dd>
+          <dt>Prenotazioni</dt>
+          <dd>Consigliate per gruppi oltre 8 persone.</dd>
+        </div>
+        <div>
+          <dt>Contatti</dt>
+          <dd>Pro Loco — telefono e email da inserire</dd>
+          <dt>Ingresso</dt>
+          <dd>Libero. Si paga solo quello che si mangia.</dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap foot-inner">
+    <div>
+      <div class="foot-brand">Sagra del Fungo Porcino</div>
+      <div>Organizzata dalla Pro Loco con i volontari del paese.</div>
+    </div>
+    <div>&copy; 2026 — Tutti i contenuti sono di esempio.</div>
+  </div>
+</footer>
+
+</body>
+</html>
