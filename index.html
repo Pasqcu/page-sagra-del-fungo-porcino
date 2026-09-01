@@ -104,12 +104,14 @@ a{color:inherit;text-decoration:none}
   position:relative; align-self:center;
   display:inline-flex; max-width:100%; min-height:0;   /* si stringe sull'immagine */
 }
+/* Piccolo segnale che la locandina si apre: sta in un angolo per non
+   coprire le informazioni stampate sul volantino */
 .poster-badge{
-  position:absolute; right:10px; bottom:10px;
-  display:flex; align-items:center; gap:6px;
-  padding:7px 12px; border-radius:999px;
-  background:rgba(36,22,10,.72); color:#fff;
-  font-size:.78rem; font-weight:700; letter-spacing:.01em;
+  position:absolute; right:9px; bottom:9px;
+  width:34px; height:34px; border-radius:50%;
+  display:grid; place-items:center;
+  background:rgba(36,22,10,.66); color:#fff;
+  font-size:1rem; line-height:1;
   pointer-events:none;
 }
 
@@ -333,7 +335,7 @@ body.lb-lock{overflow:hidden}
       width="1691" height="2400"
       fetchpriority="high" decoding="async"
       alt="Locandina della 32ª Sagra del Fungo Porcino: 4-5-6, 11-12-13, 18-19-20 settembre 2026 a Colle di Fuori">
-      <span class="poster-badge" aria-hidden="true">⤡ Tocca per ingrandire</span>
+      <span class="poster-badge" aria-hidden="true">⤢</span>
     </div>
 
     <p class="home-meta stagger">
