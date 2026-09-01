@@ -5,7 +5,8 @@ Landing page QR ordini sagra del fungo porcino rocca priora
 Web app mobile-first per la **32ª Sagra del Fungo Porcino** — Colle di Fuori, Rocca Priora (RM).
 Si apre scansionando un QR code al tavolo: schermata di benvenuto, poi scelta dello stand gastronomico.
 
-**Live:** https://pasqcu.github.io/page-sagra-del-fungo-porcino/
+**In produzione:** https://www.sagradelfungoporcino.com/Ordini_sagra2026/
+**Anteprima:** https://pasqcu.github.io/page-sagra-del-fungo-porcino/
 **Sito ufficiale:** https://www.sagradelfungoporcino.com/
 
 ## Struttura
