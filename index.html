@@ -2,319 +2,413 @@
 <html lang="it">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Sagra del Fungo Porcino — Rocca Priora</title>
-<meta name="description" content="Tre giorni di cucina, musica e tradizione dedicati al fungo porcino, a Rocca Priora.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>32ª Sagra del Fungo Porcino — Colle di Fuori</title>
+<meta name="description" content="32ª Sagra del Fungo Porcino a Colle di Fuori, Rocca Priora (RM). Settembre 2026. Ordina dagli stand gastronomici.">
+<meta name="theme-color" content="#F7E2B8">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍄</text></svg>">
+
+<!-- Precarico la locandina: è l'unica immagine della prima schermata -->
+<link rel="preload" as="image" href="assets/locandina-sagra.webp" imagesrcset="assets/locandina-sagra-800.webp 800w, assets/locandina-sagra.webp 1200w" imagesizes="(max-width:520px) 92vw, 480px" fetchpriority="high">
+
 <style>
-  :root{
-    --bg:#fbf7f0;
-    --surface:#fffdf9;
-    --ink:#241d16;
-    --muted:#6b5d4d;
-    --line:#e3d8c6;
-    --forest:#2f4a33;
-    --porcini:#8a5a2b;
-    --terracotta:#b4552f;
-    --radius:14px;
-    --wrap:1080px;
-  }
-  *{box-sizing:border-box}
-  html{scroll-behavior:smooth}
-  body{
-    margin:0;background:var(--bg);color:var(--ink);
-    font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-    font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased;
-  }
-  h1,h2,h3{font-family:Fraunces,Georgia,serif;line-height:1.15;margin:0 0 .4em}
-  h2{font-size:clamp(1.7rem,4vw,2.4rem);font-weight:800}
-  h3{font-size:1.15rem;font-weight:600}
-  p{margin:0 0 1em}
-  a{color:var(--terracotta)}
-  .wrap{max-width:var(--wrap);margin:0 auto;padding:0 22px}
-  section{padding:clamp(56px,8vw,96px) 0;border-top:1px solid var(--line)}
-  .eyebrow{
-    font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;
-    color:var(--porcini);font-weight:600;margin-bottom:.7em
-  }
+/* ============================================================
+   DESIGN SYSTEM — palette autunnale presa dalla locandina
+   ============================================================ */
+:root{
+  --crema:        #FDF3DE;
+  --sabbia:       #F7E2B8;
+  --sabbia-scura: #EFCE8C;
+  --marrone:      #6E3A14;
+  --marrone-soft: #8A5127;
+  --oro:          #F2B03C;
+  --arancio:      #E2661A;
+  --arancio-dark: #C4520E;
+  --bosco:        #2F5233;
+  --bianco:       #FFFDF7;
 
-  /* nav */
-  header{
-    position:sticky;top:0;z-index:20;background:rgba(251,247,240,.92);
-    backdrop-filter:blur(8px);border-bottom:1px solid var(--line)
-  }
-  nav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 22px;max-width:var(--wrap);margin:0 auto}
-  .brand{font-family:Fraunces,Georgia,serif;font-weight:800;font-size:1.05rem;text-decoration:none;color:var(--ink)}
-  .brand span{color:var(--porcini)}
-  .nav-links{display:flex;gap:22px;flex-wrap:wrap}
-  .nav-links a{color:var(--muted);text-decoration:none;font-size:.92rem;font-weight:500}
-  .nav-links a:hover{color:var(--forest)}
-  @media(max-width:640px){.nav-links{display:none}}
+  --ombra-sm: 0 2px 8px rgba(110,58,20,.10);
+  --ombra-md: 0 6px 20px rgba(110,58,20,.14);
+  --ombra-cta: 0 8px 22px rgba(226,102,26,.34);
 
-  /* hero */
-  .hero{
-    border-top:0;text-align:center;
-    padding:clamp(70px,11vw,130px) 0 clamp(56px,8vw,96px);
-    background:
-      radial-gradient(1100px 460px at 50% -12%, #efe4d1 0%, rgba(239,228,209,0) 62%),
-      var(--bg);
-  }
-  .hero h1{font-size:clamp(2.5rem,7.5vw,4.6rem);font-weight:800;letter-spacing:-.02em}
-  .hero h1 em{font-style:normal;color:var(--porcini)}
-  .lede{font-size:clamp(1.05rem,2.2vw,1.3rem);color:var(--muted);max-width:38ch;margin:0 auto 1.8em}
-  .dates{
-    display:inline-flex;align-items:center;gap:10px;margin-bottom:1.6em;
-    background:var(--forest);color:#f4efe4;border-radius:999px;
-    padding:9px 20px;font-size:.9rem;font-weight:600;letter-spacing:.02em
-  }
-  .btn{
-    display:inline-block;background:var(--terracotta);color:#fff;text-decoration:none;
-    padding:14px 30px;border-radius:999px;font-weight:600;font-size:.98rem;
-    box-shadow:0 6px 18px rgba(180,85,47,.24)
-  }
-  .btn:hover{background:#9c4525}
-  .btn.ghost{background:transparent;color:var(--forest);box-shadow:none;border:1.5px solid var(--forest)}
-  .btn.ghost:hover{background:var(--forest);color:#f4efe4}
-  .btn-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+  --r-sm: 12px;
+  --r-md: 18px;
+  --r-lg: 26px;
 
-  /* generic grid */
-  .grid{display:grid;gap:22px}
-  .cols-3{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
-  .card{
-    background:var(--surface);border:1px solid var(--line);
-    border-radius:var(--radius);padding:26px
+  --tap: 56px;                     /* altezza minima elementi toccabili */
+  --safe-t: env(safe-area-inset-top, 0px);
+  --safe-b: env(safe-area-inset-bottom, 0px);
+
+  /* Stack di sistema: zero font da scaricare = render immediato anche con rete satura */
+  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html,body{margin:0;padding:0;height:100%}
+body{
+  font-family:var(--font);
+  color:var(--marrone);
+  background:var(--sabbia);
+  -webkit-font-smoothing:antialiased;
+  -webkit-tap-highlight-color:transparent;
+  overflow-x:hidden;                 /* nessuno scroll orizzontale, mai */
+  overscroll-behavior-y:none;
+}
+img{max-width:100%;display:block}
+button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
+a{color:inherit;text-decoration:none}
+
+/* ============================================================
+   ROUTER A 2 SCHERMATE — transizione senza ricaricare la pagina
+   ============================================================ */
+.view{
+  position:fixed; inset:0;
+  overflow-y:auto; -webkit-overflow-scrolling:touch;
+  padding:calc(20px + var(--safe-t)) 20px calc(24px + var(--safe-b));
+  opacity:0; visibility:hidden;
+  transform:translate3d(0,14px,0) scale(.985);
+  transition:opacity .32s ease, transform .38s cubic-bezier(.22,.9,.3,1), visibility .38s;
+}
+.view.is-active{opacity:1; visibility:visible; transform:none}
+
+/* ============================================================
+   SCHERMATA 1 — BENVENUTO / LOCANDINA
+   ============================================================ */
+#view-home{
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  gap:18px; text-align:center;
+  background:
+    radial-gradient(120% 70% at 50% 0%, var(--crema) 0%, var(--sabbia) 55%, var(--sabbia-scura) 100%);
+}
+.home-inner{width:100%; max-width:480px; margin:auto; display:flex; flex-direction:column; gap:18px}
+
+.kicker{
+  align-self:center;
+  background:var(--marrone); color:var(--sabbia);
+  font-size:.75rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase;
+  padding:7px 16px; border-radius:999px;
+}
+.home-title{
+  margin:0; font-size:clamp(1.5rem,6.5vw,2.1rem); line-height:1.15; font-weight:800;
+  letter-spacing:-.01em;
+}
+.home-title span{display:block; color:var(--marrone-soft); font-size:.72em; font-weight:700; margin-top:6px}
+
+/* --- LOCANDINA -------------------------------------------------------------
+   Per sostituirla: rimpiazza i file in assets/ mantenendo gli stessi nomi.
+   Aggiorna width/height qui sotto se cambiano le proporzioni (evita salti di layout).
+--------------------------------------------------------------------------- */
+.poster{
+  width:100%; height:auto;
+  border-radius:var(--r-md);
+  box-shadow:var(--ombra-md);
+  background:var(--crema);
+  aspect-ratio:1691/2400;          /* placeholder: tiene lo spazio prima del caricamento */
+  object-fit:cover;
+}
+
+.home-meta{font-size:.95rem; font-weight:600; color:var(--marrone-soft); line-height:1.5; margin:0}
+.home-meta b{color:var(--marrone)}
+
+/* --- CTA principale --- */
+.cta{
+  display:flex; align-items:center; justify-content:center; gap:10px;
+  width:100%; min-height:var(--tap);
+  padding:18px 24px;
+  background:linear-gradient(180deg, var(--arancio) 0%, var(--arancio-dark) 100%);
+  color:#fff; font-size:1.15rem; font-weight:800; letter-spacing:.01em;
+  border-radius:var(--r-lg);
+  box-shadow:var(--ombra-cta);
+  transition:transform .14s ease, box-shadow .2s ease;
+}
+.cta:active{transform:scale(.97); box-shadow:0 4px 12px rgba(226,102,26,.28)}
+.cta .arrow{font-size:1.25em; line-height:1; transform:translateY(-1px)}
+
+/* pulsazione lenta per attirare il pollice, disattivata se l'utente riduce le animazioni */
+@media (prefers-reduced-motion:no-preference){
+  .cta{animation:pulse 2.8s ease-in-out 1.2s infinite}
+  @keyframes pulse{
+    0%,88%,100%{box-shadow:var(--ombra-cta)}
+    94%{box-shadow:0 8px 22px rgba(226,102,26,.34), 0 0 0 12px rgba(226,102,26,.10)}
   }
-  .card p:last-child{margin-bottom:0}
-  .card .num{font-family:Fraunces,serif;font-size:1.9rem;font-weight:800;color:var(--porcini);display:block;line-height:1}
+}
 
-  /* programma */
-  .day{border-bottom:1px solid var(--line);padding:26px 0}
-  .day:last-child{border-bottom:0}
-  .day-head{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:14px}
-  .day-head h3{margin:0}
-  .day-date{color:var(--muted);font-size:.9rem}
-  .slots{display:grid;gap:10px}
-  .slot{display:grid;grid-template-columns:76px 1fr;gap:16px;align-items:baseline}
-  .slot time{font-variant-numeric:tabular-nums;font-weight:600;color:var(--forest);font-size:.95rem}
-  @media(max-width:520px){.slot{grid-template-columns:64px 1fr;gap:12px}}
+/* ============================================================
+   SCHERMATA 2 — SELEZIONE RISTORANTI
+   ============================================================ */
+#view-menu{background:linear-gradient(180deg, var(--crema) 0%, var(--sabbia) 100%)}
+.menu-inner{width:100%; max-width:520px; margin:0 auto; display:flex; flex-direction:column; gap:16px}
 
-  /* menu */
-  .menu-list{list-style:none;padding:0;margin:0}
-  .menu-list li{
-    display:flex;align-items:baseline;gap:12px;
-    padding:12px 0;border-bottom:1px dashed var(--line)
-  }
-  .menu-list li:last-child{border-bottom:0}
-  .dish{font-weight:600}
-  .dot{flex:1;border-bottom:1px dotted var(--line);transform:translateY(-4px)}
-  .price{font-variant-numeric:tabular-nums;color:var(--porcini);font-weight:600;white-space:nowrap}
-  .dish-note{display:block;font-weight:400;font-size:.88rem;color:var(--muted)}
+.topbar{display:flex; align-items:center; gap:12px; margin-bottom:2px}
+.back{
+  display:flex; align-items:center; gap:8px;
+  min-height:48px; padding:10px 18px 10px 14px;
+  background:var(--bianco); border:1.5px solid var(--sabbia-scura);
+  border-radius:999px; font-weight:700; font-size:.95rem;
+  box-shadow:var(--ombra-sm);
+  transition:transform .14s ease, background .2s ease;
+}
+.back:active{transform:scale(.95); background:var(--sabbia)}
+.back .chev{font-size:1.1em; line-height:1}
 
-  /* info */
-  .info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:22px}
-  .info-grid dt{font-weight:600;color:var(--forest);margin-bottom:.25em}
-  .info-grid dd{margin:0 0 1.3em;color:var(--muted)}
-  .info-grid dd:last-child{margin-bottom:0}
+.menu-head{margin:6px 0 2px}
+.menu-head h2{margin:0 0 6px; font-size:1.55rem; font-weight:800; line-height:1.2}
+.menu-head p{margin:0; font-size:.95rem; color:var(--marrone-soft); font-weight:500}
 
-  footer{
-    background:var(--forest);color:#d8d0c2;padding:52px 0;border-top:0;
-    font-size:.92rem
-  }
-  footer a{color:#f0e6d4}
-  .foot-inner{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
-  .foot-brand{font-family:Fraunces,serif;font-weight:800;color:#f4efe4;font-size:1.1rem}
+/* --- Card ristorante --- */
+.card{
+  display:flex; flex-direction:column; gap:14px;
+  background:var(--bianco);
+  border:1.5px solid var(--sabbia-scura);
+  border-radius:var(--r-lg);
+  padding:18px;
+  box-shadow:var(--ombra-sm);
+}
+.card-top{display:flex; align-items:center; gap:14px}
+
+/* Contenitore logo: mostra un segnaposto finché il file non esiste */
+.logo{
+  position:relative; flex:0 0 auto;
+  width:64px; height:64px; border-radius:16px;
+  background:var(--sabbia); border:1.5px solid var(--sabbia-scura);
+  display:grid; place-items:center; overflow:hidden;
+  font-size:1.6rem;
+}
+.logo img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover}
+.card-name{margin:0; font-size:1.15rem; font-weight:800; line-height:1.25}
+.card-note{margin:3px 0 0; font-size:.85rem; color:var(--marrone-soft); font-weight:500}
+
+.btn-menu{
+  display:flex; align-items:center; justify-content:center; gap:9px;
+  min-height:var(--tap); padding:15px 18px;
+  background:var(--bosco); color:var(--crema);
+  font-size:1rem; font-weight:700;
+  border-radius:var(--r-md);
+  transition:transform .14s ease, background .2s ease;
+}
+.btn-menu:active{transform:scale(.97); background:#26421f}
+.btn-menu .ext{font-size:.95em; opacity:.85}
+
+/* Ingresso a cascata delle card */
+@media (prefers-reduced-motion:no-preference){
+  .is-active .stagger{animation:riseIn .5s cubic-bezier(.22,.9,.3,1) both}
+  .is-active .stagger:nth-child(1){animation-delay:.05s}
+  .is-active .stagger:nth-child(2){animation-delay:.12s}
+  .is-active .stagger:nth-child(3){animation-delay:.19s}
+  .is-active .stagger:nth-child(4){animation-delay:.26s}
+  .is-active .stagger:nth-child(5){animation-delay:.33s}
+  .is-active .stagger:nth-child(6){animation-delay:.40s}
+  @keyframes riseIn{from{opacity:0; transform:translate3d(0,18px,0)} to{opacity:1; transform:none}}
+}
+
+/* ============================================================
+   FOOTER (presente su entrambe le schermate)
+   ============================================================ */
+.foot{
+  margin-top:8px; text-align:center;
+  font-size:.85rem; color:var(--marrone-soft); font-weight:600;
+  display:flex; flex-direction:column; gap:6px; align-items:center;
+}
+.foot a{
+  text-decoration:underline; text-underline-offset:3px;
+  padding:6px 4px;                  /* area di tap decente anche per un link */
+}
+.foot a:active{color:var(--arancio-dark)}
+
+/* ============================================================
+   SCHERMI GRANDI — l'app resta una colonna centrata
+   ============================================================ */
+@media (min-width:700px){
+  .view{padding:32px}
+  #view-home .home-inner{max-width:420px}
+}
+@media (min-width:700px) and (min-height:820px){
+  .home-title{font-size:2rem}
+}
 </style>
 </head>
+
 <body>
 
-<header>
-  <nav>
-    <a class="brand" href="#top">Sagra del <span>Fungo Porcino</span></a>
-    <div class="nav-links">
-      <a href="#sagra">La sagra</a>
-      <a href="#programma">Programma</a>
-      <a href="#menu">Menù</a>
-      <a href="#info">Info</a>
+<!-- ============================================================
+     SCHERMATA 1 — BENVENUTO
+     ============================================================ -->
+<main class="view is-active" id="view-home" aria-label="Benvenuto">
+  <div class="home-inner">
+
+    <span class="kicker stagger">32ª Edizione</span>
+
+    <h1 class="home-title stagger">
+      Sagra del Fungo Porcino
+      <span>Colle di Fuori — Rocca Priora (RM)</span>
+    </h1>
+
+    <!-- LOCANDINA ---------------------------------------------------------
+         File attuali: assets/locandina-sagra.webp (1200px) e -800.webp (800px).
+         Per cambiarla: sovrascrivi questi due file, oppure modifica srcset qui sotto.
+    -------------------------------------------------------------------- -->
+    <img
+      class="poster stagger"
+      src="assets/locandina-sagra.webp"
+      srcset="assets/locandina-sagra-800.webp 800w, assets/locandina-sagra.webp 1200w"
+      sizes="(max-width:520px) 92vw, 420px"
+      width="1691" height="2400"
+      fetchpriority="high" decoding="async"
+      alt="Locandina della 32ª Sagra del Fungo Porcino: 4-5-6, 11-12-13, 18-19-20 settembre 2026 a Colle di Fuori">
+
+    <p class="home-meta stagger">
+      <b>4-5-6 · 11-12-13 · 18-19-20 Settembre 2026</b><br>
+      Stand gastronomici aperti a pranzo e cena · Ingresso libero
+    </p>
+
+    <!-- CTA: porta alla schermata 2 -->
+    <button class="cta stagger" type="button" data-go="menu">
+      Ordina qui <span class="arrow" aria-hidden="true">→</span>
+    </button>
+
+    <div class="foot stagger">
+      <a href="https://www.sagradelfungoporcino.com/" target="_blank" rel="noopener">www.sagradelfungoporcino.com</a>
+      <a href="https://www.instagram.com/_sagradelfungoporcino_/" target="_blank" rel="noopener">@_sagradelfungoporcino_</a>
     </div>
-  </nav>
-</header>
 
-<main id="top">
-
-  <section class="hero">
-    <div class="wrap">
-      <div class="dates">21 – 23 Settembre 2026</div>
-      <h1>Sagra del<br><em>Fungo Porcino</em></h1>
-      <p class="lede">Tre giorni di cucina di bosco, musica dal vivo e tradizione nel cuore di Rocca Priora.</p>
-      <div class="btn-row">
-        <a class="btn" href="#programma">Vedi il programma</a>
-        <a class="btn ghost" href="#menu">Scopri il menù</a>
-      </div>
-    </div>
-  </section>
-
-  <section id="sagra">
-    <div class="wrap">
-      <p class="eyebrow">La sagra</p>
-      <h2>Il porcino, dal bosco alla tavola</h2>
-      <p style="max-width:62ch;color:var(--muted)">
-        Ogni settembre Rocca Priora si riempie di profumo di sottobosco. I funghi arrivano
-        dai boschi dei Castelli Romani, raccolti la mattina stessa, e finiscono nelle mani dei
-        cuochi volontari della Pro Loco. Niente di industriale: tavolate lunghe,
-        piatti di ceramica e ricette che si tramandano da generazioni.
-      </p>
-      <div class="grid cols-3" style="margin-top:34px">
-        <div class="card">
-          <span class="num">3</span>
-          <h3>Giorni di festa</h3>
-          <p>Dal venerdì sera alla domenica notte, cucina aperta a pranzo e a cena.</p>
-        </div>
-        <div class="card">
-          <span class="num">12</span>
-          <h3>Piatti in menù</h3>
-          <p>Dagli antipasti al dolce, tutti preparati sul posto con porcini freschi.</p>
-        </div>
-        <div class="card">
-          <span class="num">40</span>
-          <h3>Volontari</h3>
-          <p>Cucina, servizio, allestimenti: la sagra la fa il paese, non un catering.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="programma">
-    <div class="wrap">
-      <p class="eyebrow">Programma</p>
-      <h2>Tre giorni, ora per ora</h2>
-
-      <div class="day">
-        <div class="day-head">
-          <h3>Venerdì</h3><span class="day-date">21 settembre</span>
-        </div>
-        <div class="slots">
-          <div class="slot"><time>18:00</time><span>Apertura stand e mostra micologica</span></div>
-          <div class="slot"><time>19:30</time><span>Apertura cucina — cena sotto il tendone</span></div>
-          <div class="slot"><time>21:30</time><span>Musica dal vivo: gruppo folk locale</span></div>
-        </div>
-      </div>
-
-      <div class="day">
-        <div class="day-head">
-          <h3>Sabato</h3><span class="day-date">22 settembre</span>
-        </div>
-        <div class="slots">
-          <div class="slot"><time>09:00</time><span>Escursione guidata nei boschi (iscrizione richiesta)</span></div>
-          <div class="slot"><time>12:30</time><span>Pranzo con menù completo</span></div>
-          <div class="slot"><time>16:00</time><span>Show cooking: il porcino in cinque cotture</span></div>
-          <div class="slot"><time>19:30</time><span>Cena e apertura enoteca</span></div>
-          <div class="slot"><time>22:00</time><span>Concerto in piazza</span></div>
-        </div>
-      </div>
-
-      <div class="day">
-        <div class="day-head">
-          <h3>Domenica</h3><span class="day-date">23 settembre</span>
-        </div>
-        <div class="slots">
-          <div class="slot"><time>10:00</time><span>Mercato dei produttori locali</span></div>
-          <div class="slot"><time>12:30</time><span>Pranzo della sagra</span></div>
-          <div class="slot"><time>15:30</time><span>Giochi e laboratori per bambini</span></div>
-          <div class="slot"><time>19:00</time><span>Ultima cena e premiazione del porcino più grande</span></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="menu">
-    <div class="wrap">
-      <p class="eyebrow">Menù</p>
-      <h2>Cosa si mangia</h2>
-      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(300px,1fr));margin-top:26px">
-
-        <div class="card">
-          <h3>Antipasti</h3>
-          <ul class="menu-list">
-            <li><span class="dish">Crostoni ai porcini<span class="dish-note">pane casereccio, aglio, prezzemolo</span></span><span class="dot"></span><span class="price">5 €</span></li>
-            <li><span class="dish">Insalata di porcini crudi<span class="dish-note">scaglie di grana, olio nuovo</span></span><span class="dot"></span><span class="price">7 €</span></li>
-            <li><span class="dish">Tagliere di salumi e funghi sott'olio</span><span class="dot"></span><span class="price">8 €</span></li>
-          </ul>
-        </div>
-
-        <div class="card">
-          <h3>Primi</h3>
-          <ul class="menu-list">
-            <li><span class="dish">Tagliatelle ai porcini<span class="dish-note">pasta fresca tirata a mano</span></span><span class="dot"></span><span class="price">10 €</span></li>
-            <li><span class="dish">Risotto ai funghi porcini</span><span class="dot"></span><span class="price">10 €</span></li>
-            <li><span class="dish">Zuppa di funghi e castagne</span><span class="dot"></span><span class="price">8 €</span></li>
-          </ul>
-        </div>
-
-        <div class="card">
-          <h3>Secondi</h3>
-          <ul class="menu-list">
-            <li><span class="dish">Porcini alla griglia<span class="dish-note">solo cappelle, olio e sale</span></span><span class="dot"></span><span class="price">12 €</span></li>
-            <li><span class="dish">Tagliata con porcini trifolati</span><span class="dot"></span><span class="price">16 €</span></li>
-            <li><span class="dish">Polenta e funghi</span><span class="dot"></span><span class="price">9 €</span></li>
-          </ul>
-        </div>
-
-        <div class="card">
-          <h3>Dolci e bevande</h3>
-          <ul class="menu-list">
-            <li><span class="dish">Crostata di frutti di bosco</span><span class="dot"></span><span class="price">4 €</span></li>
-            <li><span class="dish">Castagnaccio</span><span class="dot"></span><span class="price">4 €</span></li>
-            <li><span class="dish">Vino della casa<span class="dish-note">rosso o bianco, al calice</span></span><span class="dot"></span><span class="price">2 €</span></li>
-          </ul>
-        </div>
-
-      </div>
-      <p style="margin-top:22px;color:var(--muted);font-size:.92rem">
-        Disponibili opzioni vegetariane. Per intolleranze e allergie chiedere al banco.
-      </p>
-    </div>
-  </section>
-
-  <section id="info">
-    <div class="wrap">
-      <p class="eyebrow">Info pratiche</p>
-      <h2>Come arrivare e contatti</h2>
-      <dl class="info-grid" style="margin-top:26px">
-        <div>
-          <dt>Dove</dt>
-          <dd>Centro storico<br>Rocca Priora (RM)</dd>
-          <dt>Parcheggio</dt>
-          <dd>Area gratuita a 300 m dal tendone, con navetta serale.</dd>
-        </div>
-        <div>
-          <dt>Orari cucina</dt>
-          <dd>Pranzo 12:30 – 14:30<br>Cena 19:30 – 22:30</dd>
-          <dt>Prenotazioni</dt>
-          <dd>Consigliate per gruppi oltre 8 persone.</dd>
-        </div>
-        <div>
-          <dt>Contatti</dt>
-          <dd>Pro Loco — telefono e email da inserire</dd>
-          <dt>Ingresso</dt>
-          <dd>Libero. Si paga solo quello che si mangia.</dd>
-        </div>
-      </dl>
-    </div>
-  </section>
-
+  </div>
 </main>
 
-<footer>
-  <div class="wrap foot-inner">
-    <div>
-      <div class="foot-brand">Sagra del Fungo Porcino</div>
-      <div>Organizzata dalla Pro Loco di Rocca Priora con i volontari del paese.</div>
+<!-- ============================================================
+     SCHERMATA 2 — SELEZIONE RISTORANTI
+     ============================================================ -->
+<main class="view" id="view-menu" aria-label="Scegli il ristorante">
+  <div class="menu-inner">
+
+    <div class="topbar stagger">
+      <button class="back" type="button" data-go="home">
+        <span class="chev" aria-hidden="true">‹</span> Indietro
+      </button>
     </div>
-    <div>&copy; 2026 — Tutti i contenuti sono di esempio.</div>
+
+    <div class="menu-head stagger">
+      <h2>Scegli dove ordinare</h2>
+      <p>Tocca un ristorante per aprire il suo menu.</p>
+    </div>
+
+    <!-- ========== RISTORANTE 1 ==========
+         1. LOGO  → sostituisci il file assets/logo-ristorante-1.webp
+         2. NOME  → cambia il testo dentro <h3 class="card-name">
+         3. MENU  → sostituisci href="#" con il link reale del menu
+    ================================================== -->
+    <article class="card stagger">
+      <div class="card-top">
+        <div class="logo" aria-hidden="true">🍄
+          <img src="assets/logo-ristorante-1.webp" alt="" loading="lazy" decoding="async"
+               onerror="this.remove()">
+        </div>
+        <div>
+          <h3 class="card-name">Ristorante 1</h3>
+          <p class="card-note">Stand gastronomico</p>
+        </div>
+      </div>
+      <a class="btn-menu" href="#" target="_blank" rel="noopener">
+        Consulta il Menu e Ordina <span class="ext" aria-hidden="true">↗</span>
+      </a>
+    </article>
+
+    <!-- ========== RISTORANTE 2 ==========
+         1. LOGO  → assets/logo-ristorante-2.webp
+         2. NOME  → <h3 class="card-name">
+         3. MENU  → href="#"
+    ================================================== -->
+    <article class="card stagger">
+      <div class="card-top">
+        <div class="logo" aria-hidden="true">🍄
+          <img src="assets/logo-ristorante-2.webp" alt="" loading="lazy" decoding="async"
+               onerror="this.remove()">
+        </div>
+        <div>
+          <h3 class="card-name">Ristorante 2</h3>
+          <p class="card-note">Stand gastronomico</p>
+        </div>
+      </div>
+      <a class="btn-menu" href="#" target="_blank" rel="noopener">
+        Consulta il Menu e Ordina <span class="ext" aria-hidden="true">↗</span>
+      </a>
+    </article>
+
+    <!-- ========== RISTORANTE 3 ==========
+         1. LOGO  → assets/logo-ristorante-3.webp
+         2. NOME  → <h3 class="card-name">
+         3. MENU  → href="#"
+    ================================================== -->
+    <article class="card stagger">
+      <div class="card-top">
+        <div class="logo" aria-hidden="true">🍄
+          <img src="assets/logo-ristorante-3.webp" alt="" loading="lazy" decoding="async"
+               onerror="this.remove()">
+        </div>
+        <div>
+          <h3 class="card-name">Ristorante 3</h3>
+          <p class="card-note">Stand gastronomico</p>
+        </div>
+      </div>
+      <a class="btn-menu" href="#" target="_blank" rel="noopener">
+        Consulta il Menu e Ordina <span class="ext" aria-hidden="true">↗</span>
+      </a>
+    </article>
+
+    <div class="foot stagger">
+      <a href="https://www.sagradelfungoporcino.com/" target="_blank" rel="noopener">www.sagradelfungoporcino.com</a>
+    </div>
+
   </div>
-</footer>
+</main>
+
+<script>
+/* ============================================================
+   Router minimo a 2 schermate.
+   Usa l'hash dell'URL, così il tasto "indietro" fisico di Android
+   torna alla locandina invece di chiudere la pagina.
+   ============================================================ */
+(function () {
+  var views = {
+    home: document.getElementById('view-home'),
+    menu: document.getElementById('view-menu')
+  };
+  var current = 'home';
+
+  function show(name) {
+    if (!views[name] || name === current) return;
+    views[current].classList.remove('is-active');
+    current = name;
+    // forza il replay delle animazioni a cascata sulla schermata in ingresso
+    void views[name].offsetWidth;
+    views[name].classList.add('is-active');
+    views[name].scrollTop = 0;
+    // sposta il focus per chi naviga da tastiera o screen reader
+    views[name].setAttribute('tabindex', '-1');
+    views[name].focus({ preventScroll: true });
+  }
+
+  function fromHash() {
+    show(location.hash === '#ordina' ? 'menu' : 'home');
+  }
+
+  document.addEventListener('click', function (e) {
+    var el = e.target.closest('[data-go]');
+    if (!el) return;
+    var target = el.getAttribute('data-go');
+    if (target === 'menu') {
+      history.pushState({ v: 'menu' }, '', '#ordina');
+      show('menu');
+    } else {
+      // il tasto Indietro ripercorre la cronologia se possibile
+      if (history.state && history.state.v === 'menu') history.back();
+      else { history.replaceState({ v: 'home' }, '', location.pathname); show('home'); }
+    }
+  });
+
+  window.addEventListener('popstate', fromHash);
+  fromHash();
+})();
+</script>
 
 </body>
 </html>
