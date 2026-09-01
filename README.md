@@ -19,7 +19,8 @@ assets/locandina-sagra-800.webp   locandina 800px  — 44 KB
 Due schermate gestite in JS senza ricaricare la pagina:
 
 1. **Benvenuto** — locandina, date, bottone `Ordina qui`
-2. **Selezione ristoranti** — 3 card con logo, nome e link al menu (`target="_blank"`), tasto Indietro
+2. **Selezione ristoranti** — 3 card fisse (Love Truffles, Zi Righetto, Premiata Trattoria Prati)
+   con logo, nome e link al menu (`target="_blank"`), tasto Indietro
 
 Il router usa l'hash (`#ordina`), così il tasto indietro fisico di Android torna alla locandina
 invece di chiudere la pagina.
@@ -42,8 +43,7 @@ Tutti i punti sono marcati con commenti espliciti dentro `index.html`:
 
 | Cosa | Dove |
 |---|---|
-| Loghi ristoranti | Metti i file in `assets/logo-ristorante-1.webp`, `-2`, `-3` e togli il commento attorno al tag `<img>` nella card. Finché resta commentato la card mostra un fungo segnaposto e non spreca richieste di rete a vuoto |
-| Nomi ristoranti | `<h3 class="card-name">` in ogni card |
+| Loghi ristoranti | Metti i file in `assets/logo-love-truffles.webp`, `logo-zi-righetto.webp`, `logo-trattoria-prati.webp` e togli il commento attorno al tag `<img>` nella card. Finché resta commentato la card mostra un fungo segnaposto e non spreca richieste di rete a vuoto |
 | Link ai menu | `href="#"` nei bottoni `Consulta il Menu e Ordina` |
 
 ## Modifiche
