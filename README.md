@@ -30,6 +30,9 @@ invece di chiudere la pagina.
   su rete satura ogni richiesta in più è un rischio. Font di sistema, CSS inline, un solo file HTML.
 - **WebP a due risoluzioni** via `srcset`, con `width`/`height` e `aspect-ratio` per non avere
   salti di layout durante il caricamento.
+- **La locandina si dimensiona sullo spazio che avanza** (`calc(100dvh - 420px)`), così il
+  bottone `Ordina qui` resta sopra la piega da 320px fino ai Pro Max, senza scrollare.
+- **Peso a freddo: ~50 KB in 2 richieste** (6 KB di HTML + 44 KB di locandina).
 - **Touch-friendly**: bottoni ≥ 56px, nessuno scroll orizzontale, `safe-area-inset` per i notch.
 - **Animazioni** disattivate automaticamente con `prefers-reduced-motion`.
 
@@ -39,7 +42,7 @@ Tutti i punti sono marcati con commenti espliciti dentro `index.html`:
 
 | Cosa | Dove |
 |---|---|
-| Loghi ristoranti | `assets/logo-ristorante-1.webp`, `-2`, `-3` — finché mancano la card mostra un segnaposto |
+| Loghi ristoranti | Metti i file in `assets/logo-ristorante-1.webp`, `-2`, `-3` e togli il commento attorno al tag `<img>` nella card. Finché resta commentato la card mostra un fungo segnaposto e non spreca richieste di rete a vuoto |
 | Nomi ristoranti | `<h3 class="card-name">` in ogni card |
 | Link ai menu | `href="#"` nei bottoni `Consulta il Menu e Ordina` |
 
