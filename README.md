@@ -3,7 +3,7 @@
 Landing page QR ordini sagra del fungo porcino rocca priora
 
 Web app mobile-first per la **32ª Sagra del Fungo Porcino** — Colle di Fuori, Rocca Priora (RM).
-Si apre scansionando un QR code al tavolo: locandina, poi scelta dello stand gastronomico.
+Si apre scansionando un QR code al tavolo: schermata di benvenuto, poi scelta dello stand gastronomico.
 
 **Live:** https://pasqcu.github.io/page-sagra-del-fungo-porcino/
 **Sito ufficiale:** https://www.sagradelfungoporcino.com/
@@ -12,22 +12,21 @@ Si apre scansionando un QR code al tavolo: locandina, poi scelta dello stand gas
 
 ```
 index.html                          tutta l'app (HTML + CSS + JS inline)
-assets/locandina-sagra.webp         locandina 1200px — 78 KB (anche versione ingrandita)
-assets/locandina-sagra-800.webp     locandina 800px  — 44 KB
+assets/fungo-porcino.svg            mascotte, vettoriale (16 KB serviti in gzip)
 assets/logo-<nome>.webp             logo nella card, 192px
 assets/logo-<nome>-512.webp         logo ingrandito, 512px
 ```
 
 Due schermate gestite in JS senza ricaricare la pagina:
 
-1. **Benvenuto** — locandina, date, bottone `Ordina qui`
+1. **Benvenuto** — mascotte, date, bottone `Ordina qui`
 2. **Selezione ristoranti** — 3 card fisse (Love Truffles, Zi Righetto, Premiata Trattoria Prati)
    con logo, nome e link al menu (`target="_blank"`), tasto Indietro
 
-Il router usa l'hash (`#ordina`), così il tasto indietro fisico di Android torna alla locandina
-invece di chiudere la pagina.
+Il router usa l'hash (`#ordina`), così il tasto indietro fisico di Android torna alla
+schermata di benvenuto invece di chiudere la pagina.
 
-**Lightbox.** Locandina e loghi si aprono a schermo pieno al tocco; un secondo tocco
+**Lightbox.** I loghi si aprono a schermo pieno al tocco; un secondo tocco
 sull'immagine ingrandisce ancora e la rende trascinabile. Si chiude con la X, toccando fuori,
 con Esc o col tasto indietro — anche la foto aperta occupa una voce di cronologia, quindi
 il gesto indietro chiude prima la foto e solo dopo cambia schermata.
@@ -37,11 +36,13 @@ Le versioni grandi vengono scaricate al primo tocco, non al caricamento della pa
 
 - **Zero dipendenze esterne.** Niente Tailwind CDN, niente Google Fonts, niente JS di libreria:
   su rete satura ogni richiesta in più è un rischio. Font di sistema, CSS inline, un solo file HTML.
-- **WebP a due risoluzioni** via `srcset`, con `width`/`height` e `aspect-ratio` per non avere
-  salti di layout durante il caricamento.
-- **La locandina si dimensiona sullo spazio che avanza** (`calc(100dvh - 420px)`), così il
-  bottone `Ordina qui` resta sopra la piega da 320px fino ai Pro Max, senza scrollare.
-- **Peso a freddo: ~50 KB in 2 richieste** (6 KB di HTML + 44 KB di locandina).
+- **`width`/`height` e `aspect-ratio` su ogni immagine**, per non avere salti di layout
+  durante il caricamento.
+- **La mascotte è vettoriale**: nitida su qualunque densità di schermo, un file solo,
+  nessun `srcset` da mantenere.
+- **Si dimensiona sullo spazio che avanza** (`calc(100dvh - 445px)`), così il bottone
+  `Ordina qui` resta sopra la piega da 320px fino ai Pro Max, senza scrollare.
+- **Peso a freddo: ~23 KB in 2 richieste** (7 KB di HTML + 16 KB di mascotte, in gzip).
 - **Touch-friendly**: bottoni ≥ 56px, nessuno scroll orizzontale, `safe-area-inset` per i notch.
 - **Animazioni** disattivate automaticamente con `prefers-reduced-motion`.
 

@@ -21,7 +21,7 @@ Il pacchetto contiene:
 ```
 Ordini/
   index.html      la pagina
-  assets/         locandina e loghi (8 file WebP)
+  assets/         mascotte (SVG) e loghi dei ristoranti (6 file WebP)
   .htaccess       tipo MIME del WebP + cache + niente riscritture
 ```
 
@@ -102,11 +102,11 @@ Apri **https://www.sagradelfungoporcino.com/Ordini/** dal telefono, non dal comp
 
 Controlla che:
 
-- [ ] si veda la locandina e il bottone arancione "Ordina qui"
-- [ ] toccando la locandina si apra a schermo pieno
+- [ ] si veda il fungo con la corona e il bottone arancione "Ordina qui"
 - [ ] "Ordina qui" porti alle tre card con i loghi
+- [ ] toccando un logo si apra a schermo pieno
 - [ ] i tre bottoni verdi aprano i menu in una nuova scheda
-- [ ] il tasto indietro del telefono torni alla locandina invece di uscire
+- [ ] il tasto indietro del telefono torni alla schermata iniziale invece di uscire
 
 ---
 
